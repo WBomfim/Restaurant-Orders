@@ -33,7 +33,16 @@ def get_information_from_data(data):
     return products, days, clients
 
 
+def product_most_asked_by_client(client):
+    products = {
+        product: client["products"].count(product)
+        for product in client["products"]
+    }
+    return max(products, key=products.get)
+
+
 def analyze_log(path_to_file):
     data = format_data(path_to_file)
     products, days, clients = get_information_from_data(data)
-    return print(products, days, clients)
+    test = product_most_asked_by_client(clients["maria"])
+    return print(test)
