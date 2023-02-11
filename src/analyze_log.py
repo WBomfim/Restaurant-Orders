@@ -45,8 +45,12 @@ def quantity_of_order_of_a_products_by_client(client, product):
     return client["products"].count(product)
 
 
+def products_never_asked_by_client(products, client):
+    return products.difference(set(client["products"]))
+
+
 def analyze_log(path_to_file):
     data = format_data(path_to_file)
     products, days, clients = get_information_from_data(data)
-    test = quantity_of_order_of_a_products_by_client(clients["maria"], "hamburguer")
+    test = products_never_asked_by_client(products, clients["joao"])
     return print(test)
