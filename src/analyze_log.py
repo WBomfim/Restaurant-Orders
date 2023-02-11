@@ -49,8 +49,12 @@ def products_never_asked_by_client(products, client):
     return products.difference(set(client["products"]))
 
 
+def days_never_went_by_client(days, client):
+    return days.difference(set(client["days"]))
+
+
 def analyze_log(path_to_file):
     data = format_data(path_to_file)
     products, days, clients = get_information_from_data(data)
-    test = products_never_asked_by_client(products, clients["joao"])
+    test = days_never_went_by_client(days, clients["joao"])
     return print(test)
