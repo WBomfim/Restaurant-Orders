@@ -41,8 +41,12 @@ def product_most_asked_by_client(client):
     return max(products, key=products.get)
 
 
+def quantity_of_order_of_a_products_by_client(client, product):
+    return client["products"].count(product)
+
+
 def analyze_log(path_to_file):
     data = format_data(path_to_file)
     products, days, clients = get_information_from_data(data)
-    test = product_most_asked_by_client(clients["maria"])
+    test = quantity_of_order_of_a_products_by_client(clients["maria"], "hamburguer")
     return print(test)
