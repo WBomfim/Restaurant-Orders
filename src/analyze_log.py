@@ -10,6 +10,13 @@ def read_file(path_to_file):
         raise FileNotFoundError(f"Arquivo inexistente: {path_to_file}")
 
 
+def write_file(path_to_file, informations):
+    content = "\n".join([str(information) for information in informations])
+
+    with open(path_to_file, "w") as file:
+        file.write(content)
+
+
 def format_data(path_to_file):
     lines = read_file(path_to_file)
     return [tuple(line.split(",")) for line in lines]
@@ -56,3 +63,17 @@ def days_never_went_by_client(worked_days, client):
 def analyze_log(path_to_file):
     data = format_data(path_to_file)
     products_available, worked_days, clients = get_information_from_data(data)
+
+    informations = [
+        product_most_asked_by_client(clients["maria"]),
+
+        quantity_of_order_of_a_products_by_client(
+            clients["arnaldo"], "hamburguer"
+        ),
+
+        products_never_asked_by_client(products_available, clients["joao"]),
+
+        days_never_went_by_client(worked_days, clients["joao"]),
+    ]
+
+    write_file("data/mkt_campaign.txt", informations)
