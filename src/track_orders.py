@@ -31,7 +31,11 @@ class TrackOrders:
                 return max(register["order"], key=register["order"].count)
 
     def get_never_ordered_per_customer(self, customer):
-        pass
+        for register in self._orders:
+            if register["customer"] == customer:
+                return self._products_available.difference(
+                    set(register["order"])
+                )
 
     def get_days_never_visited_per_customer(self, customer):
         pass
