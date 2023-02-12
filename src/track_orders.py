@@ -1,10 +1,22 @@
 class TrackOrders:
-    # aqui deve expor a quantidade de estoquee
+    _orders: list
+
+    def __init__(self):
+        self._orders = []
+
     def __len__(self):
-        pass
+        return len(self._orders)
 
     def add_new_order(self, customer, order, day):
-        pass
+        for register in self._orders:
+            if register["customer"] == customer:
+                register["order"].append(order)
+                register["day"].append(day)
+                break
+        else:
+            self._orders.append(
+                {"customer": customer, "order": [order], "day": [day]}
+            )
 
     def get_most_ordered_dish_per_customer(self, customer):
         pass
