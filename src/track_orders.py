@@ -35,14 +35,16 @@ class TrackOrders:
             set(self._orders[customer]["days"])
         )
 
-    def get_busiest_day(self):
+    def __get_all_days(self):
         days = []
         for key in self._orders.values():
             days.extend(key["days"])
+        return days
+
+    def get_busiest_day(self):
+        days = self.__get_all_days()
         return max(days, key=days.count)
 
     def get_least_busy_day(self):
-        days = []
-        for key in self._orders.values():
-            days.extend(key["days"])
+        days = self.__get_all_days()
         return min(days, key=days.count)
