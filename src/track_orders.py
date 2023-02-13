@@ -30,6 +30,9 @@ class TrackOrders:
             set(self._orders[customer]["products"])
         )
 
+    def get_quantity_of_a_products_by_client(self, customer, product):
+        return self._orders[customer]["products"].count(product)
+
     def get_days_never_visited_per_customer(self, customer):
         return self._worked_days.difference(
             set(self._orders[customer]["days"])
